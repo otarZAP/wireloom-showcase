@@ -4,6 +4,7 @@
   "version": "0.1.0",
   "description": "Module-level perfboard planner: place breakout boards, route the wires, get a bench-ready wire list.",
   "author": "otarZAP",
+  "license": "MIT",
   "homepage": "https://github.com/otarZAP/wireloom-showcase",
   "type": "module",
   "main": "electron/main.cjs",

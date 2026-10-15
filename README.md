@@ -115,4 +115,5 @@ the installer and publishes it as a release — which is also the auto-update fe
 
 ## Licence
 
-Not chosen yet — all rights reserved for now.
+[MIT](LICENSE) — free to use, modify and share, including in your own projects. Module definitions you
+add to the library are welcome as pull requests, especially ones you've verified against real hardware.
