@@ -18,7 +18,11 @@ publishes a GitHub Release with three files:
 | `latest.yml` | the update feed installed copies read |
 | `Wireloom-Setup-X.Y.Z.exe.blockmap` | lets updates download only the changed blocks |
 
-Add notes to `CHANGELOG.md` before tagging; paste them into the release description afterwards.
+Add a `## X.Y.Z (date)` section to `CHANGELOG.md` before tagging — the workflow uses it as the release
+notes (plus the install instructions in `.github/release-footer.md`) and fails if it's missing.
+
+electron-builder only builds; the GitHub CLI publishes. electron-builder's own uploader raced itself
+creating the release on v0.1.0's first run and dropped the installer while still exiting successfully.
 
 ## How auto-update works
 
@@ -28,9 +32,9 @@ the background. The status bar shows the progress and then *"Update vX ready —
 you don't click, it installs the next time you quit. *Help → Check for updates…* does it on demand.
 
 **The release files must be publicly downloadable** for this to work — installed copies can't log in
-to GitHub. This repo is the release host (`build.publish` in `package.json` points here), so once it's
-public, every release published here is the update feed. While it's private, installed copies report
-*"Update check unavailable"* in the status bar — harmless; you just install new versions by hand.
+to GitHub. This public repo is the release host (`build.publish` in `package.json` points here), so every
+release published here is the update feed. If the host were ever private, installed copies would report
+*"Update check unavailable"* in the status bar — harmless; new versions would just be installed by hand.
 
 ## Code signing (the SmartScreen warning)
 
