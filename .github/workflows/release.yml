@@ -30,7 +30,21 @@ jobs:
         run: |
           v=$(node -p "require('./package.json').version")
           [ "v$v" = "${GITHUB_REF_NAME}" ] || { echo "Tag ${GITHUB_REF_NAME} doesn't match package.json version $v"; exit 1; }
-      - name: Build installer and publish the release
-        run: npx electron-builder --win --publish always
+      # electron-builder only BUILDS. Its own uploader raced itself creating the release on
+      # v0.1.0's first run and silently dropped the installer, so publishing is done by the
+      # GitHub CLI in one step that fails loudly if any file is missing.
+      - name: Build the installer
+        run: npx electron-builder --win --publish never
+      - name: Publish the GitHub release
+        shell: bash
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          v="${GITHUB_REF_NAME#v}"
+          files=("release/Wireloom-Setup-$v.exe" "release/Wireloom-Setup-$v.exe.blockmap" "release/latest.yml")
+          for f in "${files[@]}"; do [ -f "$f" ] || { echo "missing build output: $f"; exit 1; }; done
+          awk -v v="$v" '$0 ~ "^## "v" " {f=1; next} /^## / && f {exit} f' CHANGELOG.md > notes.md
+          [ -s notes.md ] || { echo "CHANGELOG.md has no '## $v' section"; exit 1; }
+          cat .github/release-footer.md >> notes.md
+          gh release create "$GITHUB_REF_NAME" "${files[@]}" --title "Wireloom $v" --notes-file notes.md
+          gh release view "$GITHUB_REF_NAME" --json assets -q '.assets[].name'
