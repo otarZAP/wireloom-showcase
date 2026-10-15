@@ -1,0 +1,588 @@
+{
+  "format": "wireloom-project",
+  "version": 1,
+  "name": "GPS Trail Logger",
+  "notes": "Example project: a handheld GPS trail logger. ESP32-S3 with a 3.2\" TFT, four buttons and the GPS on the front; microSD and the battery chain (LiPo → TP4056 → switch → buck-boost) on the back. The ESP32 lies sideways so its antenna sits at the right edge, clear of the screen.",
+  "board": {
+    "cols": 30,
+    "rows": 54
+  },
+  "netClasses": {
+    "signal": {
+      "label": "signal",
+      "color": "#8ab4f8"
+    },
+    "vcc": {
+      "label": "power",
+      "color": "#ff6b6b"
+    },
+    "gnd": {
+      "label": "GND",
+      "color": "#9aa4b2"
+    },
+    "sck": {
+      "label": "SPI clock",
+      "color": "#ffe94d"
+    },
+    "mosi": {
+      "label": "SPI MOSI",
+      "color": "#4d8bff"
+    },
+    "miso": {
+      "label": "SPI MISO",
+      "color": "#ff9d4d"
+    },
+    "cs": {
+      "label": "chip select",
+      "color": "#c77dff"
+    },
+    "uart": {
+      "label": "serial",
+      "color": "#56d4dd"
+    },
+    "i2c": {
+      "label": "I²C",
+      "color": "#7ee787"
+    },
+    "ctrl": {
+      "label": "control",
+      "color": "#58a6ff"
+    },
+    "btn": {
+      "label": "buttons",
+      "color": "#ff7ab2"
+    },
+    "vbat": {
+      "label": "battery / switched",
+      "color": "#c9a227"
+    },
+    "batneg": {
+      "label": "BAT− (not GND)",
+      "color": "#a0785a"
+    }
+  },
+  "rules": {
+    "antennaMinSep": 8,
+    "antennaKeep": 4,
+    "router": {
+      "turn": 2,
+      "soft": 3,
+      "cross": 6,
+      "hop": 10,
+      "antennaZone": 8
+    }
+  },
+  "modules": {
+    "esp32-s3-devkitc-1": {
+      "format": "wireloom-module",
+      "version": 1,
+      "id": "esp32-s3-devkitc-1",
+      "name": "ESP32-S3-DevKitC-1",
+      "category": "MCU",
+      "size": {
+        "w": 10,
+        "h": 25
+      },
+      "pins": [
+        {"name": "3V3", "x": 0, "y": 1},
+        {"name": "3V3", "x": 0, "y": 2},
+        {"name": "RST", "x": 0, "y": 3},
+        {"name": "IO4", "x": 0, "y": 4},
+        {"name": "IO5", "x": 0, "y": 5},
+        {"name": "IO6", "x": 0, "y": 6},
+        {"name": "IO7", "x": 0, "y": 7},
+        {"name": "IO15", "x": 0, "y": 8},
+        {"name": "IO16", "x": 0, "y": 9},
+        {"name": "IO17", "x": 0, "y": 10},
+        {"name": "IO18", "x": 0, "y": 11},
+        {"name": "IO8", "x": 0, "y": 12},
+        {"name": "IO3", "x": 0, "y": 13},
+        {"name": "IO46", "x": 0, "y": 14},
+        {"name": "IO9", "x": 0, "y": 15},
+        {"name": "IO10", "x": 0, "y": 16},
+        {"name": "IO11", "x": 0, "y": 17},
+        {"name": "IO12", "x": 0, "y": 18},
+        {"name": "IO13", "x": 0, "y": 19},
+        {"name": "IO14", "x": 0, "y": 20},
+        {"name": "5V", "x": 0, "y": 21},
+        {"name": "GND", "x": 0, "y": 22},
+        {"name": "GND", "x": 9, "y": 1},
+        {"name": "IO43", "x": 9, "y": 2},
+        {"name": "IO44", "x": 9, "y": 3},
+        {"name": "IO1", "x": 9, "y": 4},
+        {"name": "IO2", "x": 9, "y": 5},
+        {"name": "IO42", "x": 9, "y": 6},
+        {"name": "IO41", "x": 9, "y": 7},
+        {"name": "IO40", "x": 9, "y": 8},
+        {"name": "IO39", "x": 9, "y": 9},
+        {"name": "IO38", "x": 9, "y": 10},
+        {"name": "IO37", "x": 9, "y": 11},
+        {"name": "IO36", "x": 9, "y": 12},
+        {"name": "IO35", "x": 9, "y": 13},
+        {"name": "IO0", "x": 9, "y": 14},
+        {"name": "IO45", "x": 9, "y": 15},
+        {"name": "IO48", "x": 9, "y": 16},
+        {"name": "IO47", "x": 9, "y": 17},
+        {"name": "IO21", "x": 9, "y": 18},
+        {"name": "IO20", "x": 9, "y": 19},
+        {"name": "IO19", "x": 9, "y": 20},
+        {"name": "GND", "x": 9, "y": 21},
+        {"name": "GND", "x": 9, "y": 22}
+      ],
+      "antenna": {
+        "edge": "top",
+        "band": "2.4GHz"
+      },
+      "metal": false,
+      "offboard": false,
+      "color": "#3a4250",
+      "note": "DevKitC-1 · socket it",
+      "verify": "Headers assumed 0.9\" (9 holes) apart, J1 on the left with USB at the bottom (parts side). Measure yours. Its PCB antenna is the end opposite the USB.",
+      "verified": false,
+      "source": "Modelled from common ESP32-S3-DevKitC-1 modules — not yet checked against a specific board."
+    },
+    "gy-neo6mv2-gps": {
+      "format": "wireloom-module",
+      "version": 1,
+      "id": "gy-neo6mv2-gps",
+      "name": "GY-NEO6MV2 GPS",
+      "category": "GNSS",
+      "size": {
+        "w": 10,
+        "h": 18
+      },
+      "pins": [
+        {"name": "VCC", "x": 3, "y": 17},
+        {"name": "RX", "x": 4, "y": 17},
+        {"name": "TX", "x": 5, "y": 17},
+        {"name": "GND", "x": 6, "y": 17}
+      ],
+      "antenna": {
+        "edge": "top",
+        "band": "GNSS"
+      },
+      "metal": false,
+      "offboard": false,
+      "color": "#123436",
+      "note": "NEO-6M · patch",
+      "verify": "GY-NEO6MV2 order VCC·RX·TX·GND. GPS TX goes to the ESP RX pin (IO9). The ceramic patch needs sky.",
+      "verified": false,
+      "source": "Modelled from common GY-NEO6MV2 GPS modules — not yet checked against a specific board."
+    },
+    "ili9341-tft-3v2-spi": {
+      "format": "wireloom-module",
+      "version": 1,
+      "id": "ili9341-tft-3v2-spi",
+      "name": "ILI9341 3.2\" SPI TFT",
+      "category": "Display",
+      "size": {
+        "w": 22,
+        "h": 31
+      },
+      "pins": [
+        {"name": "VCC", "x": 4, "y": 30},
+        {"name": "GND", "x": 5, "y": 30},
+        {"name": "CS", "x": 6, "y": 30},
+        {"name": "RESET", "x": 7, "y": 30},
+        {"name": "DC", "x": 8, "y": 30},
+        {"name": "SDI", "x": 9, "y": 30},
+        {"name": "SCK", "x": 10, "y": 30},
+        {"name": "LED", "x": 11, "y": 30},
+        {"name": "SDO", "x": 12, "y": 30},
+        {"name": "T_CLK", "x": 13, "y": 30},
+        {"name": "T_CS", "x": 14, "y": 30},
+        {"name": "T_DIN", "x": 15, "y": 30},
+        {"name": "T_DO", "x": 16, "y": 30},
+        {"name": "T_IRQ", "x": 17, "y": 30}
+      ],
+      "antenna": null,
+      "metal": true,
+      "offboard": false,
+      "color": "#16314d",
+      "note": "3.2\" SPI",
+      "verify": "14-pin header assumed along the bottom edge, VCC at the left seen from the screen side. SDO (MISO) is deliberately left unconnected: the firmware never reads the display, and some ILI9341 boards don't release MISO, which breaks the SD card on the shared bus. Touch pins (T_*) unused.",
+      "verified": false,
+      "source": "Modelled from common ILI9341 3.2\" SPI TFT modules — not yet checked against a specific board."
+    },
+    "tactile-4x-cluster": {
+      "format": "wireloom-module",
+      "version": 1,
+      "id": "tactile-4x-cluster",
+      "name": "4× 6 mm tactile buttons",
+      "category": "Input",
+      "size": {
+        "w": 9,
+        "h": 9
+      },
+      "pins": [
+        {"name": "M", "x": 1, "y": 1},
+        {"name": "Mg", "x": 3, "y": 3},
+        {"name": "U", "x": 5, "y": 1},
+        {"name": "Ug", "x": 7, "y": 3},
+        {"name": "D", "x": 1, "y": 5},
+        {"name": "Dg", "x": 3, "y": 7},
+        {"name": "S", "x": 5, "y": 5},
+        {"name": "Sg", "x": 7, "y": 7}
+      ],
+      "antenna": null,
+      "metal": false,
+      "offboard": false,
+      "color": "#2a1c27",
+      "note": "diagonal legs",
+      "verify": "6×6 tactile switches: wire DIAGONAL legs — those are always on opposite sides of the switch. One leg to the GPIO, the other to GND.",
+      "verified": false,
+      "source": "Modelled from common 4× 6 mm tactile buttons modules — not yet checked against a specific board."
+    },
+    "microsd-spi-module": {
+      "format": "wireloom-module",
+      "version": 1,
+      "id": "microsd-spi-module",
+      "name": "microSD SPI module",
+      "category": "Storage",
+      "size": {
+        "w": 10,
+        "h": 16
+      },
+      "pins": [
+        {"name": "GND", "x": 2, "y": 15},
+        {"name": "VCC", "x": 3, "y": 15},
+        {"name": "MISO", "x": 4, "y": 15},
+        {"name": "MOSI", "x": 5, "y": 15},
+        {"name": "SCK", "x": 6, "y": 15},
+        {"name": "CS", "x": 7, "y": 15}
+      ],
+      "antenna": null,
+      "metal": false,
+      "offboard": false,
+      "color": "#24282f",
+      "note": "SPI module",
+      "verify": "Common Catalex-style order GND·VCC·MISO·MOSI·SCK·CS. If yours has an AMS1117 regulator, it wants 5 V on VCC, not 3V3.",
+      "verified": false,
+      "source": "Modelled from common microSD SPI module modules — not yet checked against a specific board."
+    },
+    "divider-2x100k": {
+      "format": "wireloom-module",
+      "version": 1,
+      "id": "divider-2x100k",
+      "name": "Voltage divider 2×100k",
+      "category": "Passive",
+      "size": {
+        "w": 2,
+        "h": 9
+      },
+      "pins": [
+        {"name": "VIN", "x": 0, "y": 0},
+        {"name": "MID", "x": 0, "y": 4},
+        {"name": "GND", "x": 0, "y": 8}
+      ],
+      "antenna": null,
+      "metal": false,
+      "offboard": false,
+      "color": "#2a2a1a",
+      "note": "2×100k",
+      "verify": "Battery sense divider: 100k VIN→MID, 100k MID→GND. After the switch, so it draws nothing when off.",
+      "verified": false,
+      "source": "Modelled from common Voltage divider 2×100k modules — not yet checked against a specific board."
+    },
+    "buck-boost-3v3": {
+      "format": "wireloom-module",
+      "version": 1,
+      "id": "buck-boost-3v3",
+      "name": "Buck-boost 3.3 V (TPS63020)",
+      "category": "Power",
+      "size": {
+        "w": 5,
+        "h": 7
+      },
+      "pins": [
+        {"name": "VIN", "x": 0, "y": 6},
+        {"name": "GND", "x": 2, "y": 6},
+        {"name": "VOUT", "x": 4, "y": 6}
+      ],
+      "antenna": null,
+      "metal": false,
+      "offboard": false,
+      "color": "#2a1d10",
+      "note": "buck-boost",
+      "verify": "Buck-boost to 3.3 V (e.g. a TPS63020 module). Pin order varies by board — mirror the pinout if yours differs.",
+      "verified": false,
+      "source": "Modelled from common Buck-boost 3.3 V (TPS63020) modules — not yet checked against a specific board."
+    },
+    "ss12d00-slide-switch": {
+      "format": "wireloom-module",
+      "version": 1,
+      "id": "ss12d00-slide-switch",
+      "name": "SS12D00 slide switch",
+      "category": "Power",
+      "size": {
+        "w": 5,
+        "h": 3
+      },
+      "pins": [
+        {"name": "NC", "x": 1, "y": 1},
+        {"name": "COM", "x": 2, "y": 1},
+        {"name": "ON", "x": 3, "y": 1}
+      ],
+      "antenna": null,
+      "metal": false,
+      "offboard": false,
+      "color": "#2b2f36",
+      "note": "power",
+      "verify": "SPDT slide switch (SS12D00). Middle pin = COM. Mount it with the slider at the board edge.",
+      "verified": false,
+      "source": "Modelled from common SS12D00 slide switch modules — not yet checked against a specific board."
+    },
+    "tp4056-usbc-protected": {
+      "format": "wireloom-module",
+      "version": 1,
+      "id": "tp4056-usbc-protected",
+      "name": "TP4056 USB-C charger (protected)",
+      "category": "Power",
+      "size": {
+        "w": 7,
+        "h": 10
+      },
+      "pins": [
+        {"name": "OUT+", "x": 0, "y": 9},
+        {"name": "B+", "x": 2, "y": 9},
+        {"name": "B-", "x": 4, "y": 9},
+        {"name": "OUT-", "x": 6, "y": 9}
+      ],
+      "antenna": null,
+      "metal": false,
+      "offboard": false,
+      "color": "#2a2110",
+      "note": "USB-C charger",
+      "verify": "Protected TP4056, pads assumed OUT+ · B+ · B− · OUT− left→right with USB at the top. B− is NOT ground — the protection FETs sit between B− and OUT−.",
+      "verified": false,
+      "source": "Modelled from common TP4056 USB-C charger (protected) modules — not yet checked against a specific board."
+    },
+    "lipo-pouch-1s": {
+      "format": "wireloom-module",
+      "version": 1,
+      "id": "lipo-pouch-1s",
+      "name": "LiPo 1S pouch cell",
+      "category": "Power",
+      "size": {
+        "w": 12,
+        "h": 20
+      },
+      "pins": [
+        {"name": "BAT+", "x": 5, "y": 0},
+        {"name": "BAT-", "x": 6, "y": 0}
+      ],
+      "antenna": null,
+      "metal": true,
+      "offboard": true,
+      "color": "#2a1d10",
+      "note": "in case · insulate from joints",
+      "verify": "Off-board: in the case, behind a stiff insulating sheet, never pressed on solder joints. Leads go to the TP4056 B+/B−.",
+      "verified": false,
+      "source": "Modelled from common LiPo 1S pouch cell modules — not yet checked against a specific board."
+    }
+  },
+  "parts": [
+    {
+      "id": "esp",
+      "module": "esp32-s3-devkitc-1",
+      "label": "ESP32-S3",
+      "x": 5,
+      "y": 1,
+      "rot": 90,
+      "side": "back",
+      "mirrorPins": false
+    },
+    {
+      "id": "gps",
+      "module": "gy-neo6mv2-gps",
+      "label": "GPS",
+      "x": 1,
+      "y": 1,
+      "rot": 90,
+      "side": "front",
+      "mirrorPins": false
+    },
+    {
+      "id": "tft",
+      "module": "ili9341-tft-3v2-spi",
+      "label": "TFT 3.2\"",
+      "x": 4,
+      "y": 12,
+      "rot": 0,
+      "side": "front",
+      "mirrorPins": false
+    },
+    {
+      "id": "btn",
+      "module": "tactile-4x-cluster",
+      "label": "Buttons",
+      "x": 10,
+      "y": 44,
+      "rot": 0,
+      "side": "front",
+      "mirrorPins": false
+    },
+    {
+      "id": "sd",
+      "module": "microsd-spi-module",
+      "label": "microSD",
+      "x": 0,
+      "y": 13,
+      "rot": 0,
+      "side": "back",
+      "mirrorPins": false
+    },
+    {
+      "id": "div",
+      "module": "divider-2x100k",
+      "label": "VBAT ÷2",
+      "x": 10,
+      "y": 13,
+      "rot": 0,
+      "side": "back",
+      "mirrorPins": false
+    },
+    {
+      "id": "reg",
+      "module": "buck-boost-3v3",
+      "label": "3V3 reg",
+      "x": 3,
+      "y": 31,
+      "rot": 0,
+      "side": "back",
+      "mirrorPins": false
+    },
+    {
+      "id": "sw",
+      "module": "ss12d00-slide-switch",
+      "label": "Power",
+      "x": 0,
+      "y": 32,
+      "rot": 270,
+      "side": "back",
+      "mirrorPins": false
+    },
+    {
+      "id": "tp",
+      "module": "tp4056-usbc-protected",
+      "label": "TP4056",
+      "x": 0,
+      "y": 44,
+      "rot": 270,
+      "side": "back",
+      "mirrorPins": false
+    },
+    {
+      "id": "lipo",
+      "module": "lipo-pouch-1s",
+      "label": "LiPo",
+      "x": 10,
+      "y": 42,
+      "rot": 270,
+      "side": "back",
+      "mirrorPins": false
+    }
+  ],
+  "nets": [
+    {
+      "name": "SCK",
+      "class": "sck",
+      "pins": ["esp:IO12", "tft:SCK", "sd:SCK"]
+    },
+    {
+      "name": "MOSI",
+      "class": "mosi",
+      "pins": ["esp:IO11", "tft:SDI", "sd:MOSI"]
+    },
+    {
+      "name": "MISO",
+      "class": "miso",
+      "pins": ["esp:IO13", "sd:MISO"]
+    },
+    {
+      "name": "TFT_CS",
+      "class": "cs",
+      "pins": ["esp:IO15", "tft:CS"]
+    },
+    {
+      "name": "TFT_DC",
+      "class": "ctrl",
+      "pins": ["esp:IO14", "tft:DC"]
+    },
+    {
+      "name": "TFT_RST",
+      "class": "ctrl",
+      "pins": ["esp:IO47", "tft:RESET"]
+    },
+    {
+      "name": "SD_CS",
+      "class": "cs",
+      "pins": ["esp:IO21", "sd:CS"]
+    },
+    {
+      "name": "GPS_RX",
+      "class": "uart",
+      "pins": ["esp:IO9", "gps:TX"]
+    },
+    {
+      "name": "GPS_TX",
+      "class": "uart",
+      "pins": ["esp:IO10", "gps:RX"]
+    },
+    {
+      "name": "BTN_MODE",
+      "class": "btn",
+      "pins": ["esp:IO2", "btn:M"]
+    },
+    {
+      "name": "BTN_UP",
+      "class": "btn",
+      "pins": ["esp:IO8", "btn:U"]
+    },
+    {
+      "name": "BTN_DN",
+      "class": "btn",
+      "pins": ["esp:IO18", "btn:D"]
+    },
+    {
+      "name": "BTN_SEL",
+      "class": "btn",
+      "pins": ["esp:IO39", "btn:S"]
+    },
+    {
+      "name": "BAT+",
+      "class": "vbat",
+      "pins": ["tp:B+", "lipo:BAT+"]
+    },
+    {
+      "name": "BAT−",
+      "class": "batneg",
+      "pins": ["tp:B-", "lipo:BAT-"]
+    },
+    {
+      "name": "VCHG",
+      "class": "vbat",
+      "pins": ["tp:OUT+", "sw:COM"]
+    },
+    {
+      "name": "VSW",
+      "class": "vbat",
+      "pins": ["sw:ON", "reg:VIN", "div:VIN"]
+    },
+    {
+      "name": "VBAT_SENSE",
+      "class": "vbat",
+      "pins": ["div:MID", "esp:IO1"]
+    },
+    {
+      "name": "3V3",
+      "class": "vcc",
+      "pins": ["reg:VOUT", "esp:3V3", "tft:VCC", "tft:LED", "sd:VCC", "gps:VCC"]
+    },
+    {
+      "name": "GND",
+      "class": "gnd",
+      "pins": ["tp:OUT-", "reg:GND", "div:GND", "esp:GND", "tft:GND", "sd:GND", "gps:GND", "btn:Mg", "btn:Ug", "btn:Dg", "btn:Sg"]
+    }
+  ]
+}

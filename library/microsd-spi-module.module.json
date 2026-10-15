@@ -1,0 +1,27 @@
+{
+  "format": "wireloom-module",
+  "version": 1,
+  "id": "microsd-spi-module",
+  "name": "microSD SPI module",
+  "category": "Storage",
+  "size": {
+    "w": 10,
+    "h": 16
+  },
+  "pins": [
+    {"name": "GND", "x": 2, "y": 15},
+    {"name": "VCC", "x": 3, "y": 15},
+    {"name": "MISO", "x": 4, "y": 15},
+    {"name": "MOSI", "x": 5, "y": 15},
+    {"name": "SCK", "x": 6, "y": 15},
+    {"name": "CS", "x": 7, "y": 15}
+  ],
+  "antenna": null,
+  "metal": false,
+  "offboard": false,
+  "color": "#24282f",
+  "note": "SPI module",
+  "verify": "Common Catalex-style order GND·VCC·MISO·MOSI·SCK·CS. If yours has an AMS1117 regulator, it wants 5 V on VCC, not 3V3.",
+  "verified": false,
+  "source": "Modelled from common microSD SPI module modules — not yet checked against a specific board."
+}

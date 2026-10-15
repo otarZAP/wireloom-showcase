@@ -1,0 +1,24 @@
+{
+  "format": "wireloom-module",
+  "version": 1,
+  "id": "buck-boost-3v3",
+  "name": "Buck-boost 3.3 V (TPS63020)",
+  "category": "Power",
+  "size": {
+    "w": 5,
+    "h": 7
+  },
+  "pins": [
+    {"name": "VIN", "x": 0, "y": 6},
+    {"name": "GND", "x": 2, "y": 6},
+    {"name": "VOUT", "x": 4, "y": 6}
+  ],
+  "antenna": null,
+  "metal": false,
+  "offboard": false,
+  "color": "#2a1d10",
+  "note": "buck-boost",
+  "verify": "Buck-boost to 3.3 V (e.g. a TPS63020 module). Pin order varies by board — mirror the pinout if yours differs.",
+  "verified": false,
+  "source": "Modelled from common Buck-boost 3.3 V (TPS63020) modules — not yet checked against a specific board."
+}

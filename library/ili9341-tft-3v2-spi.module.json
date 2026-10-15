@@ -1,0 +1,35 @@
+{
+  "format": "wireloom-module",
+  "version": 1,
+  "id": "ili9341-tft-3v2-spi",
+  "name": "ILI9341 3.2\" SPI TFT",
+  "category": "Display",
+  "size": {
+    "w": 22,
+    "h": 31
+  },
+  "pins": [
+    {"name": "VCC", "x": 4, "y": 30},
+    {"name": "GND", "x": 5, "y": 30},
+    {"name": "CS", "x": 6, "y": 30},
+    {"name": "RESET", "x": 7, "y": 30},
+    {"name": "DC", "x": 8, "y": 30},
+    {"name": "SDI", "x": 9, "y": 30},
+    {"name": "SCK", "x": 10, "y": 30},
+    {"name": "LED", "x": 11, "y": 30},
+    {"name": "SDO", "x": 12, "y": 30},
+    {"name": "T_CLK", "x": 13, "y": 30},
+    {"name": "T_CS", "x": 14, "y": 30},
+    {"name": "T_DIN", "x": 15, "y": 30},
+    {"name": "T_DO", "x": 16, "y": 30},
+    {"name": "T_IRQ", "x": 17, "y": 30}
+  ],
+  "antenna": null,
+  "metal": true,
+  "offboard": false,
+  "color": "#16314d",
+  "note": "3.2\" SPI",
+  "verify": "14-pin header assumed along the bottom edge, VCC at the left seen from the screen side. SDO (MISO) is deliberately left unconnected: the firmware never reads the display, and some ILI9341 boards don't release MISO, which breaks the SD card on the shared bus. Touch pins (T_*) unused.",
+  "verified": false,
+  "source": "Modelled from common ILI9341 3.2\" SPI TFT modules — not yet checked against a specific board."
+}

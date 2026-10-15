@@ -1,0 +1,25 @@
+{
+  "format": "wireloom-module",
+  "version": 1,
+  "id": "tp4056-usbc-protected",
+  "name": "TP4056 USB-C charger (protected)",
+  "category": "Power",
+  "size": {
+    "w": 7,
+    "h": 10
+  },
+  "pins": [
+    {"name": "OUT+", "x": 0, "y": 9},
+    {"name": "B+", "x": 2, "y": 9},
+    {"name": "B-", "x": 4, "y": 9},
+    {"name": "OUT-", "x": 6, "y": 9}
+  ],
+  "antenna": null,
+  "metal": false,
+  "offboard": false,
+  "color": "#2a2110",
+  "note": "USB-C charger",
+  "verify": "Protected TP4056, pads assumed OUT+ · B+ · B− · OUT− left→right with USB at the top. B− is NOT ground — the protection FETs sit between B− and OUT−.",
+  "verified": false,
+  "source": "Modelled from common TP4056 USB-C charger (protected) modules — not yet checked against a specific board."
+}

@@ -1,0 +1,32 @@
+{
+  "format": "wireloom-module",
+  "version": 1,
+  "id": "nrf24l01",
+  "name": "nRF24L01+ (PA+LNA)",
+  "category": "Radio",
+  "size": {
+    "w": 6,
+    "h": 11
+  },
+  "pins": [
+    {"name": "VCC", "x": 1, "y": 9},
+    {"name": "CSN", "x": 2, "y": 9},
+    {"name": "MOSI", "x": 3, "y": 9},
+    {"name": "IRQ", "x": 4, "y": 9},
+    {"name": "GND", "x": 1, "y": 10},
+    {"name": "CE", "x": 2, "y": 10},
+    {"name": "SCK", "x": 3, "y": 10},
+    {"name": "MISO", "x": 4, "y": 10}
+  ],
+  "antenna": {
+    "edge": "top",
+    "band": "2.4GHz"
+  },
+  "metal": false,
+  "offboard": false,
+  "color": "#0f2418",
+  "note": "ant ▲",
+  "verify": "Pin 1 (GND) is the square pad. Edge row GND·CE·SCK·MISO, inner row VCC·CSN·MOSI·IRQ (antenna up, parts side). Solder a 10–47 µF cap across VCC/GND.",
+  "verified": false,
+  "source": "Modelled from common nRF24L01+ (PA+LNA) modules — not yet checked against a specific board."
+}

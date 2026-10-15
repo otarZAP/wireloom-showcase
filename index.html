@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' data: blob:; img-src 'self' data: blob:" />
+<title>Wireloom</title>
+<link rel="icon" id="favicon" href="data:," />
+</head>
+<body>
+<div id="app">
+  <header class="topbar">
+    <div class="brand" id="brand"></div>
+    <input id="projName" class="projname" spellcheck="false" title="Project name" />
+    <span id="fileName" class="filename"></span>
+    <span id="dirty" class="dirty"></span>
+    <div class="spacer"></div>
+    <button class="btn ghost" data-cmd="new"   title="New project (Ctrl+N)">New</button>
+    <button class="btn ghost" data-cmd="open"  title="Open… (Ctrl+O)">Open…</button>
+    <button class="btn ghost" data-cmd="save"  title="Save (Ctrl+S)">Save</button>
+    <button class="btn ghost" data-cmd="saveAs" title="Save as… (Ctrl+Shift+S)">Save as…</button>
+    <span class="seg">
+      <button class="btn icon" data-cmd="undo" title="Undo (Ctrl+Z)">↶</button>
+      <button class="btn icon" data-cmd="redo" title="Redo (Ctrl+Y)">↷</button>
+    </span>
+    <button class="btn ghost" data-cmd="help" title="Shortcuts &amp; help (?)">?</button>
+  </header>
+
+  <nav class="toolbar">
+    <div class="tgroup"><label>Tool</label>
+      <span class="seg">
+        <button class="btn" data-cmd="tool:select"     title="Select &amp; move parts (V)">Select<kbd>V</kbd></button>
+        <button class="btn" data-cmd="tool:connect"    title="Click two pins to wire them (C) — Shift keeps going">Connect<kbd>C</kbd></button>
+        <button class="btn" data-cmd="tool:disconnect" title="Click a pin to unwire it (X)">Disconnect<kbd>X</kbd></button>
+      </span></div>
+    <div class="tgroup"><label>View</label>
+      <span class="seg">
+        <button class="btn" data-cmd="view:both"  title="X-ray from the front (1)">Both<kbd>1</kbd></button>
+        <button class="btn" data-cmd="view:front" title="Front face (2)">Front<kbd>2</kbd></button>
+        <button class="btn" data-cmd="view:back"  title="Solder side, mirrored as you'll see it flipped (3)">Back · solder<kbd>3</kbd></button>
+      </span></div>
+    <div class="tgroup"><label>Wires</label>
+      <span class="seg">
+        <button class="btn" data-cmd="wires:routed"   title="Routed along the hole grid">Routed</button>
+        <button class="btn" data-cmd="wires:ratsnest" title="Straight lines (connectivity only)">Ratsnest</button>
+        <button class="btn" data-cmd="wires:off"      title="Hide wires">Off</button>
+      </span></div>
+    <div class="tgroup"><label>Zoom</label>
+      <span class="seg">
+        <button class="btn icon" data-cmd="zoomOut" title="Zoom out (−)">−</button>
+        <button class="btn icon" data-cmd="zoomFit" title="Fit to window (0)">Fit</button>
+        <button class="btn icon" data-cmd="zoomIn"  title="Zoom in (+)">+</button>
+      </span></div>
+    <div class="tgroup"><label>Board</label>
+      <input class="num" id="boardCols" type="number" min="4" max="200" title="Columns (holes)" />
+      <span class="dim">×</span>
+      <input class="num" id="boardRows" type="number" min="4" max="200" title="Rows (holes)" />
+      <button class="btn icon" data-cmd="swapBoard" title="Swap portrait / landscape">⇄</button>
+      <span class="dim small" id="boardMm"></span></div>
+    <div class="tgroup"><label>Export</label>
+      <span class="seg">
+        <button class="btn" data-cmd="exportSheet" title="Printable build sheet: drawings, wire list, cut list, BOM">Build sheet</button>
+        <button class="btn" data-cmd="exportSVG" title="SVG drawing of the current view">SVG</button>
+        <button class="btn" data-cmd="exportCSV" title="Wire list as CSV">CSV</button>
+      </span></div>
+  </nav>
+
+  <main class="main">
+    <aside class="side left" id="libPanel"></aside>
+    <section class="center" id="center"><div class="toolhint" id="toolHint"></div><div class="boardhost" id="boardHost"></div></section>
+    <aside class="side right"><div id="inspector"></div><div id="checks"></div><div id="nets"></div></aside>
+  </main>
+
+  <section class="bottom" id="bottom">
+    <div class="resizer" id="resizer" title="Drag to resize"></div>
+    <div class="bottom-head" id="bottomHead"></div>
+    <div class="bottom-body" id="wireList"></div>
+  </section>
+
+  <footer class="status">
+    <span class="hover" id="statusHover"></span>
+    <span id="statusInfo"></span>
+    <span class="upd" id="statusUpdate"></span>
+  </footer>
+</div>
+<div id="modal" class="modal hidden"></div>
+<div id="toast" class="toast"></div>
+<script type="module" src="/src/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+{
+  "format": "wireloom-module",
+  "version": 1,
+  "id": "lipo-pouch-1s",
+  "name": "LiPo 1S pouch cell",
+  "category": "Power",
+  "size": {
+    "w": 12,
+    "h": 20
+  },
+  "pins": [
+    {"name": "BAT+", "x": 5, "y": 0},
+    {"name": "BAT-", "x": 6, "y": 0}
+  ],
+  "antenna": null,
+  "metal": true,
+  "offboard": true,
+  "color": "#2a1d10",
+  "note": "in case · insulate from joints",
+  "verify": "Off-board: in the case, behind a stiff insulating sheet, never pressed on solder joints. Leads go to the TP4056 B+/B−.",
+  "verified": false,
+  "source": "Modelled from common LiPo 1S pouch cell modules — not yet checked against a specific board."
+}

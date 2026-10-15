@@ -1,0 +1,62 @@
+{
+  "name": "wireloom",
+  "productName": "Wireloom",
+  "version": "0.1.0",
+  "description": "Module-level perfboard planner: place breakout boards, route the wires, get a bench-ready wire list.",
+  "author": "otarZAP",
+  "homepage": "https://github.com/otarZAP/wireloom-showcase",
+  "type": "module",
+  "main": "electron/main.cjs",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "node --test test/*.test.js",
+    "test:e2e": "node --test test/e2e/*.test.js",
+    "test:all": "node --test test/*.test.js && vite build && node --test test/e2e/*.test.js",
+    "app": "vite build && node tools/run-electron.mjs",
+    "smoke": "vite build && node tools/run-electron.mjs --smoke-test",
+    "icon": "node tools/make-icon.mjs",
+    "dist": "vite build && electron-builder --win --publish never",
+    "release": "vite build && electron-builder --win --publish always"
+  },
+  "dependencies": {
+    "electron-updater": "^6.8.9"
+  },
+  "devDependencies": {
+    "electron": "^44.7.0",
+    "electron-builder": "^26.15.3",
+    "puppeteer-core": "^25.13.0",
+    "vite": "^8.3.4",
+    "vite-plugin-singlefile": "^2.3.3"
+  },
+  "allowScripts": {
+    "electron@44.7.0": true
+  },
+  "build": {
+    "appId": "com.otarzap.wireloom",
+    "productName": "Wireloom",
+    "copyright": "Copyright © 2026 otarZAP",
+    "directories": { "output": "release", "buildResources": "build" },
+    "files": ["dist/**/*", "electron/**/*", "build/icon.png", "package.json"],
+    "fileAssociations": [
+      { "ext": "wireloom", "name": "Wireloom project", "description": "Wireloom perfboard project", "role": "Editor" }
+    ],
+    "win": {
+      "target": [{ "target": "nsis", "arch": ["x64"] }],
+      "icon": "build/icon.png",
+      "artifactName": "Wireloom-Setup-${version}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Wireloom",
+      "deleteAppDataOnUninstall": false
+    },
+    "publish": [{ "provider": "github", "owner": "otarZAP", "repo": "wireloom-showcase", "releaseType": "release" }]
+  }
+}

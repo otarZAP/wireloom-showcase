@@ -1,0 +1,5 @@
+{
+ "note": "Regression snapshot of routing the bundled example. Regenerate deliberately if the router changes.",
+ "wires": 36,
+ "totalLen": 868.4142135623731
+}

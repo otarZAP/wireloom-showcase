@@ -1,0 +1,29 @@
+{
+  "format": "wireloom-module",
+  "version": 1,
+  "id": "tactile-4x-cluster",
+  "name": "4× 6 mm tactile buttons",
+  "category": "Input",
+  "size": {
+    "w": 9,
+    "h": 9
+  },
+  "pins": [
+    {"name": "M", "x": 1, "y": 1},
+    {"name": "Mg", "x": 3, "y": 3},
+    {"name": "U", "x": 5, "y": 1},
+    {"name": "Ug", "x": 7, "y": 3},
+    {"name": "D", "x": 1, "y": 5},
+    {"name": "Dg", "x": 3, "y": 7},
+    {"name": "S", "x": 5, "y": 5},
+    {"name": "Sg", "x": 7, "y": 7}
+  ],
+  "antenna": null,
+  "metal": false,
+  "offboard": false,
+  "color": "#2a1c27",
+  "note": "diagonal legs",
+  "verify": "6×6 tactile switches: wire DIAGONAL legs — those are always on opposite sides of the switch. One leg to the GPIO, the other to GND.",
+  "verified": false,
+  "source": "Modelled from common 4× 6 mm tactile buttons modules — not yet checked against a specific board."
+}

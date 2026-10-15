@@ -1,0 +1,24 @@
+{
+  "format": "wireloom-module",
+  "version": 1,
+  "id": "ss12d00-slide-switch",
+  "name": "SS12D00 slide switch",
+  "category": "Power",
+  "size": {
+    "w": 5,
+    "h": 3
+  },
+  "pins": [
+    {"name": "NC", "x": 1, "y": 1},
+    {"name": "COM", "x": 2, "y": 1},
+    {"name": "ON", "x": 3, "y": 1}
+  ],
+  "antenna": null,
+  "metal": false,
+  "offboard": false,
+  "color": "#2b2f36",
+  "note": "power",
+  "verify": "SPDT slide switch (SS12D00). Middle pin = COM. Mount it with the slider at the board edge.",
+  "verified": false,
+  "source": "Modelled from common SS12D00 slide switch modules — not yet checked against a specific board."
+}

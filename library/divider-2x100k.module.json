@@ -1,0 +1,24 @@
+{
+  "format": "wireloom-module",
+  "version": 1,
+  "id": "divider-2x100k",
+  "name": "Voltage divider 2×100k",
+  "category": "Passive",
+  "size": {
+    "w": 2,
+    "h": 9
+  },
+  "pins": [
+    {"name": "VIN", "x": 0, "y": 0},
+    {"name": "MID", "x": 0, "y": 4},
+    {"name": "GND", "x": 0, "y": 8}
+  ],
+  "antenna": null,
+  "metal": false,
+  "offboard": false,
+  "color": "#2a2a1a",
+  "note": "2×100k",
+  "verify": "Battery sense divider: 100k VIN→MID, 100k MID→GND. After the switch, so it draws nothing when off.",
+  "verified": false,
+  "source": "Modelled from common Voltage divider 2×100k modules — not yet checked against a specific board."
+}

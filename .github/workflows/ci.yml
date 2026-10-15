@@ -1,0 +1,25 @@
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest          # cheaper and faster than Windows for the test suite
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Core tests
+        run: npm test
+      - name: Build the app
+        run: npm run build
+      - name: Browser tests (headless Chrome)
+        run: npm run test:e2e
+        env:
+          WIRELOOM_BROWSER: /usr/bin/google-chrome

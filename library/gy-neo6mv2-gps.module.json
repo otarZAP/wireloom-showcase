@@ -1,0 +1,28 @@
+{
+  "format": "wireloom-module",
+  "version": 1,
+  "id": "gy-neo6mv2-gps",
+  "name": "GY-NEO6MV2 GPS",
+  "category": "GNSS",
+  "size": {
+    "w": 10,
+    "h": 18
+  },
+  "pins": [
+    {"name": "VCC", "x": 3, "y": 17},
+    {"name": "RX", "x": 4, "y": 17},
+    {"name": "TX", "x": 5, "y": 17},
+    {"name": "GND", "x": 6, "y": 17}
+  ],
+  "antenna": {
+    "edge": "top",
+    "band": "GNSS"
+  },
+  "metal": false,
+  "offboard": false,
+  "color": "#123436",
+  "note": "NEO-6M · patch",
+  "verify": "GY-NEO6MV2 order VCC·RX·TX·GND. GPS TX goes to the ESP RX pin (IO9). The ceramic patch needs sky.",
+  "verified": false,
+  "source": "Modelled from common GY-NEO6MV2 GPS modules — not yet checked against a specific board."
+}
